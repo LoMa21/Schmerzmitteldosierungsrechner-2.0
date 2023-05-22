@@ -1,0 +1,12 @@
+credentials:
+  usernames:
+    elternteil_1:
+      name: elternteil_1
+      password: $2b$12$A76C5LOtOsGqaQMTgILzOef7/zqNgc8Bx6eVMEOf3ifKmog9uMen6 # To be replaced with hashed password
+    elternteil_2:
+      name: elternteil_2
+      password: $2b$12$JgJ0HWxcSg9HYTROoKOpkOi1eNvN0pDI7awOAjLFxmE8nufLx40Hi # To be replaced with hashed password
+cookie:
+  expiry_days: 30  # number of days until password is asked again
+  key: JgDyEoKUNItM5prxo194jDeLYzVzmYE6 # Must be string, use https://randomkeygen.com/
+  name: streamlitcookie
