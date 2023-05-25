@@ -24,7 +24,7 @@ from yaml.loader import SafeLoader
 import streamlit_authenticator as stauth
 
 
-st.title('Schmerzmitteldosierungstabelle für Kinder')
+st.title('Schmerzmitteldosierungsrechner für Kinder')
 
     
 tab1, tab2 = st.tabs(["Fachperson", "Elternteil"])
@@ -68,7 +68,7 @@ with tab1:
 
 
 with tab2:
-    st.write('Liebe Eltern, mit dieser App wird die Dosierung von Schmerzmittelsirupen für Ihr Kind berechnet.')
+    st.write('Liebe Eltern, mit dieser App wird die Dosierung von Schmerzmittelsirupe für Ihr Kind berechnet.')
     ('Ausserdem gibt es ein Schmerzmitteltagebuch, welches Ihre Daten in einem Diagramm speichern kann. Dadurch können Sie sehen, wie viel Mililiter insgesamt Ihr Kind pro Tag an Schmerzmittelsirup eingenommen hat. Dies kann hilfreich sein, um den Fachleuten bei einem nächsten Arztbesuch oder Apothekenbesuch Informationen mitzuteilen.')
 
     tab3, tab4= st.tabs(["Schmerzmittelsirupe", "Schmerzmitteltagebuch"])
@@ -77,8 +77,7 @@ with tab2:
 with tab3:
     st.header("Schmerzmittelsirupe")
     st.write("Unten finden Sie 4 verschiedene Schmerzmittelsirupe für Kinder im Alter von 0 bis 16 Jahren und einem Gewicht von 3 bis 60 kg, welche die Einnahmedosierung für das kranke Kind berechnet. Ist Ihr Kind unter 1 Jahr alt, geben Sie 0 Jahre ein.")
-    st.write("**Einnahmehinweis:** **Dafalgan** und **Ben U Ron** sind beides Paracetamol-Sirupe. **Algifor** und **Irfen** sind beides Ibuprofen-Sirupe. Sirupe welche den **gleichen Wirkstoff** haben, dürfen **nicht** zusammen eingenommen werden.")
-    st.write("Sie dürfen aber, wenn die Schmerzen zu stark sind, abwechslungsweise **Paracetamol** und **Ibuprofen** im **Abstand** von **3 Stunden** Ihrem Kind verabreichen.")
+    st.write("**Einnahmehinweis:** Dafalgan und Ben U Ron sind beides Paracetamol-Sirupe. Algifor und Irfen sind beides Ibuprofen-Sirupe. Sirupe welche den **gleichen Wirkstoff** haben, dürfen **nicht** zusammen eingenommen werden. Sie dürfen aber, wenn die Schmerzen zu stark sind, abwechslungsweise Paracetamol und Ibuprofen im **Abstand** von **3 Stunden** Ihrem Kind verabreichen.")
     st.write("Es kann sein, dass Ihr Kinderarzt eine höhere Dosierung verschrieben hat. Dieses App berechnet die Dosierung welche im Verkauf gemäss Comendium.ch zugelassen sind.")
     
     # Definierung einer Liste mit verfügbaren Sirup-Optionen
@@ -155,7 +154,7 @@ with tab4:
     # Eingabefelder für den Namen der Person, den Tag, den Sirup und die Dosierung
     name_tagb = st.text_input('Name')
     datum_tagb = st.date_input('Datum', value=date.today())
-    sirup_tagb = st.selectbox('Sirup', ('Algifor', 'Ben U Ron', 'Dafalgan', 'Irfen'))
+    sirup_tagb = st.selectbox('Sirup', ('Algifor 100mg/5ml', 'Ben U Ron', 'Dafalgan', 'Irfen'))
     dosierung_tagb = st.number_input('Dosierung in ml')
     
     # Button zum Abspeichern des JSONbin-Objekts hinzufügen
@@ -200,7 +199,7 @@ with tab4:
         # DataFrame erstellen
         
         data = []
-        for sirup_tagb in ['Algifor', 'Ben U Ron', 'Dafalgan', 'Irfen']:
+        for sirup_tagb in ['Algifor 100mg/5ml', 'Ben U Ron', 'Dafalgan', 'Irfen']:
             if sirup_tagb in daten.get(selected_name, {}):
                 for datum_tagb in daten[selected_name][sirup_tagb].keys():
                     dosierung_tagb = sum(daten[selected_name][sirup_tagb][datum_tagb])
@@ -211,7 +210,7 @@ with tab4:
         bars = alt.Chart(df).mark_bar().encode(
             x=alt.X('Datum:T', axis=alt.Axis(title='Datum')),
             y=alt.Y('Dosierung:Q', axis=alt.Axis(title='Dosierung in ml')),
-            color=alt.Color('Sirup:N', scale=alt.Scale(domain=['Algifor', 'Ben U Ron', 'Dafalgan', 'Irfen'], 
+            color=alt.Color('Sirup:N', scale=alt.Scale(domain=['Algifor 100mg/5ml', 'Ben U Ron', 'Dafalgan', 'Irfen'], 
                                                       range=['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728']))
         )
         
