@@ -32,9 +32,10 @@ tab1, tab2 = st.tabs(["Fachperson", "Elternteil"])
 with tab1:
     
     st.write("Unten finden Sie 4 verschiedene Schmerzmittelsirupe für Kinder im Alter von 0 bis 16 Jahren und einem Gewicht von 3 bis 60 kg, welche die Dosierung für das kranke Kind berechnet. Ist das Kind unter 1 Jahr alt, geben Sie 0 Jahre ein.")
+    st.write("**Hinweis:** Diese Dosierungen werden für den OTC-Verkauft, gemäss Compendium.ch, berechnet.")
     
     # Definierung einer Liste mit verfügbaren Sirup-Optionen
-    sirup_options = ["Algifor Sirup", "Ben U Ron Sirup", "Dafalgan Sirup", "Irfen Sirup"]
+    sirup_options = ["Algifor Sirup 100mg/5ml", "Ben U Ron Sirup", "Dafalgan Sirup", "Irfen Sirup"]
     # Erstellung von Optionenfeld für den Sirup
     selected_sirup = st.selectbox("Wählen Sie ein Schmerzmittelsirup:", sirup_options)
    
@@ -42,7 +43,7 @@ with tab1:
     age = (0)
     weight = (0)
     
-    if selected_sirup == 'Algifor Sirup':
+    if selected_sirup == 'Algifor Sirup 100mg/5ml':
         dosre.main_algifor(age, weight)
         dosre.calculate_max_dosage_algifor(single_dose) 
         dosre.calculate_single_dose_algifor(age, weight)
@@ -76,14 +77,17 @@ with tab2:
 with tab3:
     st.header("Schmerzmittelsirupe")
     st.write("Unten finden Sie 4 verschiedene Schmerzmittelsirupe für Kinder im Alter von 0 bis 16 Jahren und einem Gewicht von 3 bis 60 kg, welche die Einnahmedosierung für das kranke Kind berechnet. Ist Ihr Kind unter 1 Jahr alt, geben Sie 0 Jahre ein.")
+    st.write("**Einnahmehinweis:** **Dafalgan** und **Ben U Ron** sind beides Paracetamol-Sirupe. **Algifor** und **Irfen** sind beides Ibuprofen-Sirupe. Sirupe welche den **gleichen Wirkstoff** haben, dürfen **nicht** zusammen eingenommen werden.")
+    st.write("Sie dürfen aber, wenn die Schmerzen zu stark sind, abwechslungsweise **Paracetamol** und **Ibuprofen** im **Abstand** von **3 Stunden** Ihrem Kind verabreichen.")
+    st.write("Es kann sein, dass Ihr Kinderarzt eine höhere Dosierung verschrieben hat. Dieses App berechnet die Dosierung welche im Verkauf gemäss Comendium.ch zugelassen sind.")
     
     # Definierung einer Liste mit verfügbaren Sirup-Optionen
-    sirup_options = ["Algifor Sirup ", "Ben U Ron Sirup ", "Dafalgan Sirup ", "Irfen Sirup "]
+    sirup_options = ["Algifor Sirup 100mg/5ml", "Ben U Ron Sirup ", "Dafalgan Sirup ", "Irfen Sirup "]
     # Erstellung von Optionenfeld für den Sirup
     selected_sirup = st.selectbox("Wählen Sie ein Schmerzmittelsirup:", sirup_options)
     
    
-    if selected_sirup == 'Algifor Sirup ':
+    if selected_sirup == 'Algifor Sirup 100mg/5ml':
 
         dosre.calculate_max_dosage_algifor1(single_dose) 
         dosre.calculate_single_dose_algifor1(age, weight)
@@ -121,7 +125,7 @@ with tab4:
     bin_id = jsonbin_secrets["bin_id"]
     
     # -------- user login --------
-  
+    
     with open('config.yaml') as file:
         config = yaml.load(file, Loader=SafeLoader)
     
@@ -187,9 +191,6 @@ with tab4:
     # Liste der Namen aus der JSON-Datei erstellen
     daten = load_key(api_key, bin_id, username)
     
-    st.write(username)
-    
-    st.write(daten)
     options = daten.keys()
     
     if options:
